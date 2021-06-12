@@ -4,7 +4,7 @@ This application provides you with a **PCI-compliant**, **PSD2-compliant**, and 
 
 ## Overview
 
-![Demo](docs/demo.gif?raw=true 'Demo')
+![Demo](readme-docs/demo.gif?raw=true 'Demo')
 
 ## Getting started
 
@@ -57,11 +57,11 @@ Checkout any order by visiting `https://checkout.yourdomain.com/:order_id`, wher
 
 Go to _Settings → Markets_ in Commerce Layer and add the Checkout URL template to your market(s), making sure to include the `:order_id` param placeholder:
 
-![Checkout URL configuration](docs/checkout-url-config.png?raw=true 'Checkout URL configuration')
+![Checkout URL configuration](readme-docs/checkout-url-config.png?raw=true 'Checkout URL configuration')
 
 This way, you'll to get the actual URL (i.e. with the real order id) returned by the orders API in the `checkout_url` order attribute:
 
-![Checkout URL API response](docs/checkout-url-api-response-snippet.png?raw=true 'Checkout URL API response')
+![Checkout URL API response](readme-docs/checkout-url-api-response-snippet.png?raw=true 'Checkout URL API response')
 
 ## License
 
