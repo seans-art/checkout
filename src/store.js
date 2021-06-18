@@ -269,7 +269,7 @@ export default new Vuex.Store({
         .catch(response => {
           commit(
             'updatePlaceOrderError',
-            i18n.t('errors.' + response.data.errors[0].meta.error)
+            i18n.t('errors. testing' + response.data.errors[0].meta.error)
           )
         })
         .finally(() => {

@@ -441,7 +441,7 @@ const updateOrderPaymentSource = (order, paymentSourceAttributes) => {
 
 const placeOrder = order => {
   return apiClient
-    .patch('/orders/' + order.id + '?include=' + orderIncludes.join(','), {
+    .patch('/orders/' + order.id + '?include=authorizations', {
       data: {
         type: 'orders',
         id: order.id,
