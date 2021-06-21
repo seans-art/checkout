@@ -11,6 +11,10 @@ npm run serve
 
 ## REQUEST 
 
+```json
+{"grant_type":"client_credentials","client_id":"r22xcbeSlfnB6ZyWjxJ8Zpva2LZ7P4dk1hHA4i238qY"}
+```
+
 ```sh
 curl "https://self.commercelayer.io/api/orders/qjobhEYLbm?include=line_items,billing_address,shipping_address,shipments.shipment_line_items.line_item,shipments.available_shipping_methods,shipments.shipping_method,available_payment_methods,payment_method,payment_source" ^
   -X "PATCH" ^
