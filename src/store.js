@@ -120,8 +120,9 @@ export default new Vuex.Store({
     updateField
   },
   actions: {
-    setOrder ({ commit }, orderId) {
-      return APIService.getOrder(orderId).then(order => {
+    setOrder ({ commit }, order) {
+      console.dir(order)
+      return APIService.getOrder(order.orderId, order.orderId2).then(order => {
         commit('updateOrder', order)
         commit('updateCurrentStep', getCurrentStep(order))
         commit('updateRequiresDelivery', getRequiresDelivery(order))
@@ -269,7 +270,7 @@ export default new Vuex.Store({
         .catch(response => {
           commit(
             'updatePlaceOrderError',
-            i18n.t('errors.' + response.data.errors[0].meta.error)
+            i18n.t('errors. testing' + response.data.errors[0].meta.error)
           )
         })
         .finally(() => {

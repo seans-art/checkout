@@ -12,6 +12,7 @@ import {
   orderDefaults,
   customerAddressAttributes
 } from '@/utils/attributes'
+import router from '../router'
 
 const normalizedOrder = (order, response) => {
   let nOrder = normalize(response.data).get(orderAttributes)
@@ -121,7 +122,10 @@ const handleCustomerSubscription = (customerEmail, customerSubscription) => {
   }
 }
 
-const getOrder = orderId => {
+const getOrder = (orderId, orderId2) => {
+  console.log('orderId:', orderId)
+  console.log('orderId2:', orderId2)
+  console.dir(router.currentRoute)
   return apiClient
     .get('/orders/' + orderId + '?include=' + orderIncludes.join(','))
     .then(response => {
@@ -441,7 +445,7 @@ const updateOrderPaymentSource = (order, paymentSourceAttributes) => {
 
 const placeOrder = order => {
   return apiClient
-    .patch('/orders/' + order.id + '?include=' + orderIncludes.join(','), {
+    .patch('/orders/' + order.id + '?include=authorizations', {
       data: {
         type: 'orders',
         id: order.id,
