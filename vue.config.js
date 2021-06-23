@@ -1,5 +1,7 @@
 module.exports = {
-  publicPath: "/", 
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/'
+    : '/',
   devServer: {
     disableHostCheck: true,
     public: process.env.VUE_APP_DEV_SERVER,
