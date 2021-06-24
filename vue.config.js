@@ -1,4 +1,7 @@
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/checkout/'
+    : '/',
   devServer: {
     disableHostCheck: true,
     public: process.env.VUE_APP_DEV_SERVER,
