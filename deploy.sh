@@ -3,12 +3,6 @@
 set -e
 # build
 npm run build
-# navigate into the build output directory
-cd dist
-# if you are deploying to a custom domain
-echo 'checkout.seanobrien.art' > CNAME
-git init
 git add -A
-git commit -m 'deploy'
-git push -f git@github.com:sean-art/checkout.git master
-cd -
+git commit -m 'deployed from script'
+git push git@github.com:sean-art/checkout.git deploy-testing
