@@ -58,10 +58,25 @@ $client_token = $payment_response.attributes.client_token
 
 #!pwsh
 
-Invoke-RestMethod -Method "GET" `
-  -Uri "http://self.commercelayer.io/api/orders/$orderId?include=payment_method" `
-  -Headers @{"authorization"="Bearer $access_token"
-    'Accept'='application/vnd.api+json'}
+$headers = @{
+  'Authorization' = "Bearer $access_token"
+  'Accept'='application/vnd.api+json'
+}
+$url = "http://self.commercelayer.io/api/orders/${orderId}?include=payment_method"
+$order_response = Invoke-RestMethod -Method "GET" -Uri $url -Headers $headers
+$order_response.included.attributes
+$order_response.data.attributes
+
+#!markdown
+
+### From CommerceLayer Tutorial
+
+```sh
+curl -X GET \
+  http://self.commercelayer.io/api/orders/wXQehljAlB?include=payment_method \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJvcmdhbml6YXRpb24iOnsiaWQiOiJqWGRXYkZqWU15Iiwic2x1ZyI6InNlbGYifSwiYXBwbGljYXRpb24iOnsiaWQiOiJkTW5XbWl3RU9wIiwia2luZCI6InNhbGVzX2NoYW5uZWwiLCJwdWJsaWMiOnRydWV9LCJ0ZXN0Ijp0cnVlLCJleHAiOjE2MjQ2NTk1NjIsInJhbmQiOjAuMjkzNjIwNDQ0MzM1MjE2Mn0.fUHnrbS7TxIJ2fzO5ZlmuXrRNL_Wjtd7QfoqtUPkIh3R6ZpheOSDyDe27YuFZJiA9eyTChgpFLJ3GXA9ejfAfw' \
+  -H 'Accept: application/vnd.api+json'
+  ```
 
 #!pwsh
 
