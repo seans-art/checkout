@@ -194,7 +194,7 @@ export default {
                             'braintree-card-error'
                           )
                           // eslint-disable-next-line
-                          cardError.innerHTML = this.$t(err.message)
+                          cardError.innerHTML = "<pre>TEST MESSAGE</pre>"
                           that.loading_payment = false
                           return
                         }

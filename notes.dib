@@ -154,3 +154,30 @@ Invoke-WebRequest -Uri "https://self.commercelayer.io/api/orders/qjobhEYLbm?incl
   "accept-encoding"="gzip, deflate, br"
   "accept-language"="en-US,en;q=0.9"
 }
+
+6.24.2021
+REQUEST:
+curl 'https://self.commercelayer.io/api/orders/wXQehljAlB?include=authorizations' \
+  -X 'PATCH' \
+  -H 'authority: self.commercelayer.io' \
+  -H 'sec-ch-ua: " Not;A Brand";v="99", "Google Chrome";v="91", "Chromium";v="91"' \
+  -H 'accept: application/vnd.api+json' \
+  -H 'authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJvcmdhbml6YXRpb24iOnsiaWQiOiJqWGRXYkZqWU15Iiwic2x1ZyI6InNlbGYifSwiYXBwbGljYXRpb24iOnsiaWQiOiJkTW5XbWl3RU9wIiwia2luZCI6InNhbGVzX2NoYW5uZWwiLCJwdWJsaWMiOnRydWV9LCJ0ZXN0Ijp0cnVlLCJleHAiOjE2MjQ1OTA4NjgsInJhbmQiOjAuNDU0MzY1MzgwMzM5MzA5NH0.6p5_StW1YtiXVjW9_V0JpYBRxei6tGHqtUVu2gssPJZWAw2rfrikKTtyl5pDHMr5hd_Spxa3wP9vcOcP8HZWiw' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36' \
+  -H 'content-type: application/vnd.api+json' \
+  -H 'origin: https://checkout.seanobrien.art' \
+  -H 'sec-fetch-site: cross-site' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'referer: https://checkout.seanobrien.art/' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  --data-raw '{"data":{"type":"orders","id":"wXQehljAlB","attributes":{"_place":1}}}' \
+  --compressed
+
+  RESPONSE:
+  {"errors":[{"title":"(92206) Url must be 13 characters or shorter and can only contain letters, numbers and periods.","detail":"(92206) Url must be 13 characters or shorter and can only contain letters, numbers and periods.","code":"VALIDATION_ERROR","source":{"pointer":"/data"},"status":"422","meta":{"error":"(92206) Url must be 13 characters or shorter and can only contain letters, numbers and periods."}},{"title":"authorization failed","detail":"authorization failed","code":"VALIDATION_ERROR","source":{"pointer":"/data"},"status":"422","meta":{"error":"authorization_failed"}},{"title":"transition is not permitted","detail":"status - transition is not permitted","code":"VALIDATION_ERROR","source":{"pointer":"/data/attributes/status"},"status":"422","meta":{"error":"not_permitted_transition"}}]}
+
+
+  error - Data request
+  "{"data":{"type":"braintree_payments","id":"zXJXsqwevp","attributes":{"payment_method_nonce":"ed139b7c-384e-0c02-75be-7c7a45698916"}}}"
