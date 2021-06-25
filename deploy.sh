@@ -4,8 +4,8 @@ set -e
 # build
 npm run build
 # if you are deploying to a custom domain
-echo 'checkout.seanobrien.art' > dist/CNAME
-cp dist/* docs/ -r
+echo 'checkout.seanobrien.art' > docs/CNAME
+cp robots.txt docs/ -r
 # git init
 git add -A
 git commit -m "$1"
