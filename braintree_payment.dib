@@ -4,7 +4,7 @@
 
 #!pwsh
 
-Invoke-WebRequest -Uri "https://self.commercelayer.io/oauth/token" `
+$access_token = Invoke-RestMethod "https://self.commercelayer.io/oauth/token" `
 -Method "POST" `
 -Headers @{
 "method"="POST"
@@ -24,12 +24,12 @@ Invoke-WebRequest -Uri "https://self.commercelayer.io/oauth/token" `
   "accept-language"="en-US,en;q=0.9"
 } `
 -ContentType "application/json" `
--Body "{`"grant_type`":`"client_credentials`",`"client_id`":`"r22xcbeSlfnB6ZyWjxJ8Zpva2LZ7P4dk1hHA4i238qY`"}" | Select-Object -Property Content -ExpandProperty Content | ConvertFrom-Json | Select-Object access_token -ExpandProperty access_token
+-Body "{`"grant_type`":`"client_credentials`",`"client_id`":`"r22xcbeSlfnB6ZyWjxJ8Zpva2LZ7P4dk1hHA4i238qY`"}" | Select-Object access_token -ExpandProperty access_token 
 # Write-Host $access_token
 
 #!pwsh
 
-Invoke-RestMethod "https://self.commercelayer.io/api/braintree_payments" `
+$payment_response = Invoke-RestMethod "https://self.commercelayer.io/api/braintree_payments" `
 -Method "POST" `
 -Headers @{
 "method"="POST"
@@ -38,7 +38,7 @@ Invoke-RestMethod "https://self.commercelayer.io/api/braintree_payments" `
   "path"="/api/braintree_payments"
   "sec-ch-ua"="`" Not;A Brand`";v=`"99`", `"Microsoft Edge`";v=`"91`", `"Chromium`";v=`"91`""
   "accept"="application/vnd.api+json"
-  "authorization"="Bearer eyJhbGciOiJIUzUxMiJ9.eyJvcmdhbml6YXRpb24iOnsiaWQiOiJqWGRXYkZqWU15Iiwic2x1ZyI6InNlbGYifSwiYXBwbGljYXRpb24iOnsiaWQiOiJkTW5XbWl3RU9wIiwia2luZCI6InNhbGVzX2NoYW5uZWwiLCJwdWJsaWMiOnRydWV9LCJ0ZXN0Ijp0cnVlLCJleHAiOjE2MjQ2NDUwMjMsInJhbmQiOjAuNDA5MTAyODQ5Nzg1NzI3Nn0._mx6HMFvZXoG__YK_g60fa9NWrP1cvAs3cutXQshgjwIkiT2tvbblc2goojLii-B2BHfNUJtz7UDnb_RVJWkyg"
+  "authorization"="Bearer $access_token"
   "sec-ch-ua-mobile"="?0"
   "user-agent"="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54"
   "origin"="https://checkout.seanobrien.art"
@@ -50,4 +50,5 @@ Invoke-RestMethod "https://self.commercelayer.io/api/braintree_payments" `
   "accept-language"="en-US,en;q=0.9"
 } `
 -ContentType "application/vnd.api+json" `
--Body "{`"data`":{`"type`":`"braintree_payments`",`"attributes`":{},`"relationships`":{`"order`":{`"data`":{`"type`":`"orders`",`"id`":`"wXQehljAlB`"}}}}}" | Select-Object data -ExpandProperty data
+-Body "{`"data`":{`"type`":`"braintree_payments`",`"attributes`":{},`"relationships`":{`"order`":{`"data`":{`"type`":`"orders`",`"id`":`"wXQehljAlB`"}}}}}" | Select-Object data -ExpandProperty data 
+$payment_response
