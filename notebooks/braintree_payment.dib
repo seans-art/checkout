@@ -1,0 +1,136 @@
+#!markdown
+
+## Braintree Payment Lifecycle
+
+#!pwsh
+
+$order_id = "qjobhEYLbm"
+$merchant_id = "pc8gbnvtznp4ff2t"
+$payment_method = "39714df7-94fc-0663-7c53-06b7fb21c51c"
+$client_id = "r22xcbeSlfnB6ZyWjxJ8Zpva2LZ7P4dk1hHA4i238qY"
+
+#!pwsh
+
+$token_response = Invoke-RestMethod "https://self.commercelayer.io/oauth/token" `
+-Method "POST" `
+-Headers @{
+"method"="POST"
+  "authority"="self.commercelayer.io"
+  "scheme"="https"
+  "path"="/oauth/token"
+  "sec-ch-ua"="`" Not;A Brand`";v=`"99`", `"Microsoft Edge`";v=`"91`", `"Chromium`";v=`"91`""
+  "accept"="application/json"
+  "sec-ch-ua-mobile"="?0"
+  "user-agent"="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54"
+  "origin"="https://checkout.seanobrien.art"
+  "sec-fetch-site"="cross-site"
+  "sec-fetch-mode"="cors"
+  "sec-fetch-dest"="empty"
+  "referer"="https://checkout.seanobrien.art/"
+  "accept-encoding"="gzip, deflate, br"
+  "accept-language"="en-US,en;q=0.9"
+} `
+-ContentType "application/json" `
+-Body "{`"grant_type`":`"client_credentials`",`"client_id`":`"$client_id`"}" 
+$access_token = $token_response.access_token
+$token_response.access_token
+
+#!pwsh
+
+$payment_response = Invoke-RestMethod "https://self.commercelayer.io/api/braintree_payments" `
+-Method "POST" `
+-Headers @{
+"method"="POST"
+  "authority"="self.commercelayer.io"
+  "scheme"="https"
+  "path"="/api/braintree_payments"
+  "sec-ch-ua"="`" Not;A Brand`";v=`"99`", `"Microsoft Edge`";v=`"91`", `"Chromium`";v=`"91`""
+  "accept"="application/vnd.api+json"
+  "authorization"="Bearer $access_token"
+  "sec-ch-ua-mobile"="?0"
+  "user-agent"="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54"
+  "origin"="https://checkout.seanobrien.art"
+  "sec-fetch-site"="cross-site"
+  "sec-fetch-mode"="cors"
+  "sec-fetch-dest"="empty"
+  "referer"="https://checkout.seanobrien.art/"
+  "accept-encoding"="gzip, deflate, br"
+  "accept-language"="en-US,en;q=0.9"
+} `
+-ContentType "application/vnd.api+json" `
+-Body "{`"data`":{`"type`":`"braintree_payments`",`"attributes`":{},`"relationships`":{`"order`":{`"data`":{`"type`":`"orders`",`"id`":`"$order_id`"}}}}}" | Select-Object data -ExpandProperty data 
+$client_token = $payment_response.attributes.client_token
+$payment_response.id
+$client_token = $payment_response.attributes.client_token
+
+#!markdown
+
+### From CommerceLayer Tutorial
+
+```sh
+curl -X GET \
+  http://self.commercelayer.io/api/orders/wXQehljAlB?include=payment_method \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJvcmdhbml6YXRpb24iOnsiaWQiOiJqWGRXYkZqWU15Iiwic2x1ZyI6InNlbGYifSwiYXBwbGljYXRpb24iOnsiaWQiOiJkTW5XbWl3RU9wIiwia2luZCI6InNhbGVzX2NoYW5uZWwiLCJwdWJsaWMiOnRydWV9LCJ0ZXN0Ijp0cnVlLCJleHAiOjE2MjQ2NTk1NjIsInJhbmQiOjAuMjkzNjIwNDQ0MzM1MjE2Mn0.fUHnrbS7TxIJ2fzO5ZlmuXrRNL_Wjtd7QfoqtUPkIh3R6ZpheOSDyDe27YuFZJiA9eyTChgpFLJ3GXA9ejfAfw' \
+  -H 'Accept: application/vnd.api+json'
+  ```
+
+#!pwsh
+
+$headers = @{
+  'Authorization' = "Bearer $access_token"
+  'Accept'='application/vnd.api+json'
+}
+$url = "http://self.commercelayer.io/api/orders/${order_id}?include=payment_method"
+$order_response = Invoke-RestMethod -Method "GET" -Uri $url -Headers $headers
+$order_response.included.attributes
+$order_response.data.attributes
+
+#!pwsh
+
+$patch_result = Invoke-WebRequest -Uri "https://self.commercelayer.io/api/orders/${order_id}?include=authorizations" `
+-Method "PATCH" `
+-Headers @{
+"method"="PATCH"
+  "authority"="self.commercelayer.io"
+  "scheme"="https"
+  "path"="/api/orders/${order_id}?include=authorizations"
+  "pragma"="no-cache"
+  "cache-control"="no-cache"
+  "sec-ch-ua"="`" Not;A Brand`";v=`"99`", `"Microsoft Edge`";v=`"91`", `"Chromium`";v=`"91`""
+  "accept"="application/vnd.api+json"
+  "authorization"="Bearer $access_token"
+  "sec-ch-ua-mobile"="?0"
+  "user-agent"="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54"
+  "origin"="https://checkout.seanobrien.art"
+  "sec-fetch-site"="cross-site"
+  "sec-fetch-mode"="cors"
+  "sec-fetch-dest"="empty"
+  "referer"="https://checkout.seanobrien.art/"
+  "accept-encoding"="gzip, deflate, br"
+  "accept-language"="en-US,en;q=0.9"
+} `
+-ContentType "application/vnd.api+json" `
+-Body "{`"data`":{`"type`":`"orders`",`"id`":`"$order_id`",`"attributes`":{`"_place`":1}}}"
+$patch_result
+
+#!pwsh
+
+Invoke-WebRequest -Uri "https://api.sandbox.braintreegateway.com/merchants/pc8gbnvtznp4ff2t/client_api/v1/payment_methods/tokencc_bf_55hkj6_zq4shj_fc9972_ycjy5g_bb6/three_d_secure/lookup" `
+-Method "POST" `
+-Headers @{
+"Pragma"="no-cache"
+  "Cache-Control"="no-cache"
+  "sec-ch-ua"="`" Not;A Brand`";v=`"99`", `"Microsoft Edge`";v=`"91`", `"Chromium`";v=`"91`""
+  "sec-ch-ua-mobile"="?0"
+  "User-Agent"="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54"
+  "Accept"="*/*"
+  "Origin"="https://checkout.seanobrien.art"
+  "Sec-Fetch-Site"="cross-site"
+  "Sec-Fetch-Mode"="cors"
+  "Sec-Fetch-Dest"="empty"
+  "Referer"="https://checkout.seanobrien.art/"
+  "Accept-Encoding"="gzip, deflate, br"
+  "Accept-Language"="en-US,en;q=0.9"
+} `
+-ContentType "application/json" `
+-Body "{`"amount`":280,`"additionalInfo`":{`"billingLine1`":`"6122 Coldbrook Ave`",`"billingCity`":`"Lakewood`",`"billingState`":`"CA`",`"billingPostalCode`":`"90713`",`"billingCountryCode`":`"US`",`"billingPhoneNumber`":`"5624121190`",`"billingGivenName`":`"Stock`",`"billingSurname`":`"Location`",`"email`":`"alex@thefullertonian.com`"},`"exemptionRequested`":true,`"dfReferenceId`":`"0_660e9b1f-4494-472b-bcfb-fe04af152817`",`"clientMetadata`":{`"sdkVersion`":`"web/3.50.0`",`"requestedThreeDSecureVersion`":`"2`",`"cardinalDeviceDataCollectionTimeElapsed`":5200},`"authorizationFingerprint`":`"eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IjIwMTgwNDI2MTYtc2FuZGJveCIsImlzcyI6Imh0dHBzOi8vYXBpLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb20ifQ.eyJleHAiOjE2MjUyNDg3ODIsImp0aSI6IjU1NmI0Y2U5LTU1YmYtNDlmZS05YjY5LWU4NTJmMzg0ZTlmMSIsInN1YiI6InBjOGdibnZ0em5wNGZmMnQiLCJpc3MiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwibWVyY2hhbnQiOnsicHVibGljX2lkIjoicGM4Z2JudnR6bnA0ZmYydCIsInZlcmlmeV9jYXJkX2J5X2RlZmF1bHQiOnRydWV9LCJyaWdodHMiOlsibWFuYWdlX3ZhdWx0Il0sInNjb3BlIjpbIkJyYWludHJlZTpWYXVsdCJdLCJvcHRpb25zIjp7Im1lcmNoYW50X2FjY291bnRfaWQiOiJzbW96YXJ0MDUifX0.624CJN8b181zsRxrMk20HhCHAx4vI8Zv_o1KZ0KMYgXlP_gDQG1sQX22BC6e2OIgHTyIhziu2JuQniTuLiNtQA`",`"braintreeLibraryVersion`":`"braintree/web/3.50.0`",`"_meta`":{`"merchantAppId`":`"checkout.seanobrien.art`",`"platform`":`"web`",`"sdkVersion`":`"3.50.0`",`"source`":`"client`",`"integration`":`"custom`",`"integrationType`":`"custom`",`"sessionId`":`"d88e2003-82d1-409a-975f-1596872e97f1`"}}"
