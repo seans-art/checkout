@@ -2,12 +2,21 @@
 
 ## Braintree Payment Lifecycle
 
+[Creating resources](https://docs.commercelayer.io/api/creating-resources)
+
 #!pwsh
 
 $order_id = "qjobhEYLbm"
 $merchant_id = "pc8gbnvtznp4ff2t"
 $payment_method = "39714df7-94fc-0663-7c53-06b7fb21c51c"
 $client_id = "r22xcbeSlfnB6ZyWjxJ8Zpva2LZ7P4dk1hHA4i238qY"
+
+#!pwsh
+
+Invoke-RestMethod -Method "GET" `
+  "https://yourdomain.commercelayer.io/api/braintree_payments"
+  -Headers @{'Accept: application/vnd.api+json' 
+    'Authorization: Bearer your-access-token'}
 
 #!pwsh
 
@@ -60,8 +69,7 @@ $payment_response = Invoke-RestMethod "https://self.commercelayer.io/api/braintr
 -ContentType "application/vnd.api+json" `
 -Body "{`"data`":{`"type`":`"braintree_payments`",`"attributes`":{},`"relationships`":{`"order`":{`"data`":{`"type`":`"orders`",`"id`":`"$order_id`"}}}}}" | Select-Object data -ExpandProperty data 
 $client_token = $payment_response.attributes.client_token
-$payment_response.id
-$client_token = $payment_response.attributes.client_token
+$client_token 
 
 #!markdown
 
@@ -84,6 +92,10 @@ $url = "http://self.commercelayer.io/api/orders/${order_id}?include=payment_meth
 $order_response = Invoke-RestMethod -Method "GET" -Uri $url -Headers $headers
 $order_response.included.attributes
 $order_response.data.attributes
+
+#!markdown
+
+## TODO: Request a PaymentMethod and attach it to the Order.
 
 #!pwsh
 
