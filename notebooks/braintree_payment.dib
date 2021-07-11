@@ -6,17 +6,13 @@
 
 #!pwsh
 
+$organization = "self"
 $order_id = "qjobhEYLbm"
 $merchant_id = "pc8gbnvtznp4ff2t"
 $payment_method = "39714df7-94fc-0663-7c53-06b7fb21c51c"
-$client_id = "r22xcbeSlfnB6ZyWjxJ8Zpva2LZ7P4dk1hHA4i238qY"
-
-#!pwsh
-
-Invoke-RestMethod -Method "GET" `
-  "https://yourdomain.commercelayer.io/api/braintree_payments"
-  -Headers @{'Accept: application/vnd.api+json' 
-    'Authorization: Bearer your-access-token'}
+$smozart_client_id = "r22xcbeSlfnB6ZyWjxJ8Zpva2LZ7P4dk1hHA4i238qY"
+$appmin_client_id = "DU27r_FrxARAC1pRzCibqgUqw8jzmSPUzkFCzKO0iPU"
+$client_id = $smozart_client_id
 
 #!pwsh
 
@@ -24,7 +20,7 @@ $token_response = Invoke-RestMethod "https://self.commercelayer.io/oauth/token" 
 -Method "POST" `
 -Headers @{
 "method"="POST"
-  "authority"="self.commercelayer.io"
+  "authority"="$organization.commercelayer.io"
   "scheme"="https"
   "path"="/oauth/token"
   "sec-ch-ua"="`" Not;A Brand`";v=`"99`", `"Microsoft Edge`";v=`"91`", `"Chromium`";v=`"91`""
@@ -42,15 +38,25 @@ $token_response = Invoke-RestMethod "https://self.commercelayer.io/oauth/token" 
 -ContentType "application/json" `
 -Body "{`"grant_type`":`"client_credentials`",`"client_id`":`"$client_id`"}" 
 $access_token = $token_response.access_token
-$token_response.access_token
 
 #!pwsh
 
-$payment_response = Invoke-RestMethod "https://self.commercelayer.io/api/braintree_payments" `
+Invoke-RestMethod "https://$organization.commercelayer.io/api/braintree_payments" `
+-Method "GET" `
+-Headers @{
+    "authority"="$organization.commercelayer.io"
+    "scheme"="https"
+    "accept"="application/vnd.api+json"
+    "authorization"="Bearer $access_token"
+}
+
+#!pwsh
+
+$payment_response = Invoke-RestMethod "https://$organization.commercelayer.io/api/braintree_payments" `
 -Method "POST" `
 -Headers @{
-"method"="POST"
-  "authority"="self.commercelayer.io"
+  "method"="POST"
+  "authority"="$organization.commercelayer.io"
   "scheme"="https"
   "path"="/api/braintree_payments"
   "sec-ch-ua"="`" Not;A Brand`";v=`"99`", `"Microsoft Edge`";v=`"91`", `"Chromium`";v=`"91`""
@@ -88,10 +94,9 @@ $headers = @{
   'Authorization' = "Bearer $access_token"
   'Accept'='application/vnd.api+json'
 }
-$url = "http://self.commercelayer.io/api/orders/${order_id}?include=payment_method"
+$url = "http://$organization.commercelayer.io/api/orders/${order_id}?include=payment_method"
 $order_response = Invoke-RestMethod -Method "GET" -Uri $url -Headers $headers
 $order_response.included.attributes
-$order_response.data.attributes
 
 #!markdown
 
@@ -99,11 +104,11 @@ $order_response.data.attributes
 
 #!pwsh
 
-$patch_result = Invoke-WebRequest -Uri "https://self.commercelayer.io/api/orders/${order_id}?include=authorizations" `
+$patch_result = Invoke-WebRequest -Uri "https://$organization.commercelayer.io/api/orders/${order_id}?include=authorizations" `
 -Method "PATCH" `
 -Headers @{
 "method"="PATCH"
-  "authority"="self.commercelayer.io"
+  "authority"="$organization.commercelayer.io"
   "scheme"="https"
   "path"="/api/orders/${order_id}?include=authorizations"
   "pragma"="no-cache"
