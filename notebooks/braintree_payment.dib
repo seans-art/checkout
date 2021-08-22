@@ -6,17 +6,45 @@
 
 #!pwsh
 
+# ComerceLayer.io SELF 
+# Application: SMOZArot 
+# Credentials
+# Webhook: https://core.commercelayer.io/webhook_callbacks/braintree_gateways/gkGoLsGbbk
+
 $organization = "self"
+$base_endpoint = "https://$organization.commercelayer.io"
 $order_id = "qjobhEYLbm"
 $merchant_id = "pc8gbnvtznp4ff2t"
 $payment_method = "39714df7-94fc-0663-7c53-06b7fb21c51c"
-$smozart_client_id = "r22xcbeSlfnB6ZyWjxJ8Zpva2LZ7P4dk1hHA4i238qY"
-$appmin_client_id = "DU27r_FrxARAC1pRzCibqgUqw8jzmSPUzkFCzKO0iPU"
-$client_id = $smozart_client_id
+$client_id = "r22xcbeSlfnB6ZyWjxJ8Zpva2LZ7P4dk1hHA4i238qY"
+
+#!markdown
+
+## SElf Order
+
+### NOTE: WE changed Url to include `?orderId=xxx`
+
+Number	Country	Customer	Total	Status	Payment	Fulfillment	Updated
+#10887848	US
+Portraits
+
+alex@thefullertonian.com	$280.00	lenspending
+
+#11165406	empty
+Portraits
+
+alex@thefullertonian.com	$240.00	lenspending
+Jun 25, 2021
+
+#10673599	US
+Portraits
+
+alex@thefullertonian.com	$520.00	lenspending
+Jul 01, 2021
 
 #!pwsh
 
-$token_response = Invoke-RestMethod "https://self.commercelayer.io/oauth/token" `
+$token_response = Invoke-RestMethod "$base_endpoint/oauth/token" `
 -Method "POST" `
 -Headers @{
 "method"="POST"
@@ -38,10 +66,11 @@ $token_response = Invoke-RestMethod "https://self.commercelayer.io/oauth/token" 
 -ContentType "application/json" `
 -Body "{`"grant_type`":`"client_credentials`",`"client_id`":`"$client_id`"}" 
 $access_token = $token_response.access_token
+$token_response.access_token
 
 #!pwsh
 
-Invoke-RestMethod "https://$organization.commercelayer.io/api/braintree_payments" `
+Invoke-RestMethod "$base_endpoint.commercelayer.io/api/braintree_payment_gateways" `
 -Method "GET" `
 -Headers @{
     "authority"="$organization.commercelayer.io"
@@ -96,7 +125,11 @@ $headers = @{
 }
 $url = "http://$organization.commercelayer.io/api/orders/${order_id}?include=payment_method"
 $order_response = Invoke-RestMethod -Method "GET" -Uri $url -Headers $headers
+
+$order_response.data
+$order_response.included
 $order_response.included.attributes
+$payment_gateway = $order_response.included.attributes.payment_source_type 
 
 #!markdown
 
@@ -104,31 +137,49 @@ $order_response.included.attributes
 
 #!pwsh
 
-$patch_result = Invoke-WebRequest -Uri "https://$organization.commercelayer.io/api/orders/${order_id}?include=authorizations" `
--Method "PATCH" `
+$order_result = Invoke-WebRequest -Uri "https://$organization.commercelayer.io/api/orders/${order_id}" `
+-Method "GET" `
 -Headers @{
-"method"="PATCH"
-  "authority"="$organization.commercelayer.io"
-  "scheme"="https"
-  "path"="/api/orders/${order_id}?include=authorizations"
-  "pragma"="no-cache"
-  "cache-control"="no-cache"
-  "sec-ch-ua"="`" Not;A Brand`";v=`"99`", `"Microsoft Edge`";v=`"91`", `"Chromium`";v=`"91`""
-  "accept"="application/vnd.api+json"
-  "authorization"="Bearer $access_token"
-  "sec-ch-ua-mobile"="?0"
-  "user-agent"="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54"
-  "origin"="https://checkout.seanobrien.art"
-  "sec-fetch-site"="cross-site"
-  "sec-fetch-mode"="cors"
-  "sec-fetch-dest"="empty"
-  "referer"="https://checkout.seanobrien.art/"
-  "accept-encoding"="gzip, deflate, br"
-  "accept-language"="en-US,en;q=0.9"
-} `
--ContentType "application/vnd.api+json" `
--Body "{`"data`":{`"type`":`"orders`",`"id`":`"$order_id`",`"attributes`":{`"_place`":1}}}"
-$patch_result
+    "method"="PATCH"
+    "authority"="$organization.commercelayer.io"
+    "scheme"="https"
+    "path"="/api/orders/${order_id}?include=authorizations"
+    "pragma"="no-cache"
+    "cache-control"="no-cache"
+    "sec-ch-ua"="`" Not;A Brand`";v=`"99`", `"Microsoft Edge`";v=`"91`", `"Chromium`";v=`"91`""
+    "accept"="application/vnd.api+json"
+    "authorization"="Bearer $access_token"
+    "sec-ch-ua-mobile"="?0"
+    "user-agent"="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36 Edg/91.0.864.54"
+    "origin"="https://checkout.seanobrien.art"
+    "sec-fetch-site"="cross-site"
+    "sec-fetch-mode"="cors"
+    "sec-fetch-dest"="empty"
+    "payment_method"="braintree_gateway"
+    "referer"="https://checkout.seanobrien.art/"
+    "accept-encoding"="gzip, deflate, br"
+    "accept-language"="en-US,en;q=0.9"
+  } `
+  -ContentType "application/vnd.api+json" 
+$order_result
+
+#!pwsh
+
+$order_id
+
+#!pwsh
+
+# UPDATE ORDER
+# PATCH ORDER
+
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Content-Type", "application/vnd.api+json")
+$headers.Add("Authorization", "Bearer $access_token")
+
+$body = "{`n  `"data`": {`n    `"type`": `"orders`",`n    `"id`": `"$order_id`",`n    `"attributes`": {`n      `"guest`": `"{{order_guest}}`"`n    },`n    `"relationships`": {}`n  }`n}"
+
+$response = Invoke-RestMethod "https://self.commercelayer.io/api/orders/$order_id" -Method 'PATCH' -Headers $headers -Body $body
+$response | ConvertTo-Json
 
 #!pwsh
 
