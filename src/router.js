@@ -50,7 +50,7 @@ const router = new Router({
             console.log(error)
           })
       },
-      children: [   
+      children: [
         {
           path: '',
           name: 'checkout',
