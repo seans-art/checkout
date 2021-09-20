@@ -1,0 +1,68 @@
+{
+    "authorization": "eyJ2ZXJzaW9uIjoyLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpGVXpJMU5pSXNJbXRwWkNJNklqSXdNVGd3TkRJMk1UWXRjMkZ1WkdKdmVDSXNJbWx6Y3lJNkltaDBkSEJ6T2k4dllYQnBMbk5oYm1SaWIzZ3VZbkpoYVc1MGNtVmxaMkYwWlhkaGVTNWpiMjBpZlEuZXlKbGVIQWlPakUyTWpVeU5EZzNPRElzSW1wMGFTSTZJalUxTm1JMFkyVTVMVFUxWW1ZdE5EbG1aUzA1WWpZNUxXVTROVEptTXpnMFpUbG1NU0lzSW5OMVlpSTZJbkJqT0dkaWJuWjBlbTV3TkdabU1uUWlMQ0pwYzNNaU9pSm9kSFJ3Y3pvdkwyRndhUzV6WVc1a1ltOTRMbUp5WVdsdWRISmxaV2RoZEdWM1lYa3VZMjl0SWl3aWJXVnlZMmhoYm5RaU9uc2ljSFZpYkdsalgybGtJam9pY0dNNFoySnVkblI2Ym5BMFptWXlkQ0lzSW5abGNtbG1lVjlqWVhKa1gySjVYMlJsWm1GMWJIUWlPblJ5ZFdWOUxDSnlhV2RvZEhNaU9sc2liV0Z1WVdkbFgzWmhkV3gwSWwwc0luTmpiM0JsSWpwYklrSnlZV2x1ZEhKbFpUcFdZWFZzZENKZExDSnZjSFJwYjI1eklqcDdJbTFsY21Ob1lXNTBYMkZqWTI5MWJuUmZhV1FpT2lKemJXOTZZWEowTURVaWZYMC42MjRDSk44YjE4MXpzUnhyTWsyMEhoQ0hBeDR2SThadl9vMUtaMEtNWWdYbFBfZ0RRRzFzUVgyMkJDNmUyT0lnSFR5SWh6aXUySnVRbmlUdUxpTnRRQSIsImNvbmZpZ1VybCI6Imh0dHBzOi8vYXBpLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb206NDQzL21lcmNoYW50cy9wYzhnYm52dHpucDRmZjJ0L2NsaWVudF9hcGkvdjEvY29uZmlndXJhdGlvbiIsIm1lcmNoYW50QWNjb3VudElkIjoic21vemFydDA1IiwiZ3JhcGhRTCI6eyJ1cmwiOiJodHRwczovL3BheW1lbnRzLnNhbmRib3guYnJhaW50cmVlLWFwaS5jb20vZ3JhcGhxbCIsImRhdGUiOiIyMDE4LTA1LTA4IiwiZmVhdHVyZXMiOlsidG9rZW5pemVfY3JlZGl0X2NhcmRzIl19LCJjbGllbnRBcGlVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvcGM4Z2JudnR6bnA0ZmYydC9jbGllbnRfYXBpIiwiZW52aXJvbm1lbnQiOiJzYW5kYm94IiwibWVyY2hhbnRJZCI6InBjOGdibnZ0em5wNGZmMnQiLCJhc3NldHNVcmwiOiJodHRwczovL2Fzc2V0cy5icmFpbnRyZWVnYXRld2F5LmNvbSIsImF1dGhVcmwiOiJodHRwczovL2F1dGgudmVubW8uc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbSIsInZlbm1vIjoib2ZmIiwiY2hhbGxlbmdlcyI6W10sInRocmVlRFNlY3VyZUVuYWJsZWQiOnRydWUsImFuYWx5dGljcyI6eyJ1cmwiOiJodHRwczovL29yaWdpbi1hbmFseXRpY3Mtc2FuZC5zYW5kYm94LmJyYWludHJlZS1hcGkuY29tL3BjOGdibnZ0em5wNGZmMnQifSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImJpbGxpbmdBZ3JlZW1lbnRzRW5hYmxlZCI6dHJ1ZSwiZW52aXJvbm1lbnROb05ldHdvcmsiOnRydWUsInVudmV0dGVkTWVyY2hhbnQiOmZhbHNlLCJhbGxvd0h0dHAiOnRydWUsImRpc3BsYXlOYW1lIjoiU2VhbiBPJ0JyaWVuIFBhaW50aW5ncyAmIElsbHVzdHJhdGlvbnMiLCJjbGllbnRJZCI6bnVsbCwicHJpdmFjeVVybCI6Imh0dHA6Ly9leGFtcGxlLmNvbS9wcCIsInVzZXJBZ3JlZW1lbnRVcmwiOiJodHRwOi8vZXhhbXBsZS5jb20vdG9zIiwiYmFzZVVybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXNzZXRzVXJsIjoiaHR0cHM6Ly9jaGVja291dC5wYXlwYWwuY29tIiwiZGlyZWN0QmFzZVVybCI6bnVsbCwiZW52aXJvbm1lbnQiOiJvZmZsaW5lIiwiYnJhaW50cmVlQ2xpZW50SWQiOiJtYXN0ZXJjbGllbnQzIiwibWVyY2hhbnRBY2NvdW50SWQiOiJzbW96YXJ0MDUiLCJjdXJyZW5jeUlzb0NvZGUiOiJVU0QifX0=",
+    "authorizationType": "CLIENT_TOKEN",
+    "authorizationFingerprint": "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IjIwMTgwNDI2MTYtc2FuZGJveCIsImlzcyI6Imh0dHBzOi8vYXBpLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb20ifQ.eyJleHAiOjE2MjUyNDg3ODIsImp0aSI6IjU1NmI0Y2U5LTU1YmYtNDlmZS05YjY5LWU4NTJmMzg0ZTlmMSIsInN1YiI6InBjOGdibnZ0em5wNGZmMnQiLCJpc3MiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwibWVyY2hhbnQiOnsicHVibGljX2lkIjoicGM4Z2JudnR6bnA0ZmYydCIsInZlcmlmeV9jYXJkX2J5X2RlZmF1bHQiOnRydWV9LCJyaWdodHMiOlsibWFuYWdlX3ZhdWx0Il0sInNjb3BlIjpbIkJyYWludHJlZTpWYXVsdCJdLCJvcHRpb25zIjp7Im1lcmNoYW50X2FjY291bnRfaWQiOiJzbW96YXJ0MDUifX0.624CJN8b181zsRxrMk20HhCHAx4vI8Zv_o1KZ0KMYgXlP_gDQG1sQX22BC6e2OIgHTyIhziu2JuQniTuLiNtQA",
+    "analyticsMetadata": {
+        "merchantAppId": "checkout.seanobrien.art",
+        "platform": "web",
+        "sdkVersion": "3.50.0",
+        "source": "client",
+        "integration": "custom",
+        "integrationType": "custom",
+        "sessionId": "d88e2003-82d1-409a-975f-1596872e97f1"
+    },
+    "gatewayConfiguration": {
+        "environment": "sandbox",
+        "clientApiUrl": "https://api.sandbox.braintreegateway.com:443/merchants/pc8gbnvtznp4ff2t/client_api",
+        "assetsUrl": "https://assets.braintreegateway.com",
+        "analytics": {
+            "url": "https://origin-analytics-sand.sandbox.braintree-api.com/pc8gbnvtznp4ff2t"
+        },
+        "merchantId": "pc8gbnvtznp4ff2t",
+        "venmo": "off",
+        "graphQL": {
+            "url": "https://payments.sandbox.braintree-api.com/graphql",
+            "features": [
+                "tokenize_credit_cards"
+            ]
+        },
+        "kount": {
+            "kountMerchantId": null
+        },
+        "challenges": [],
+        "creditCards": {
+            "supportedCardTypes": [
+                "American Express",
+                "Discover",
+                "JCB",
+                "MasterCard",
+                "Visa"
+            ]
+        },
+        "threeDSecureEnabled": true,
+        "threeDSecure": {
+            "cardinalAuthenticationJWT": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJiYmJlNDUwZi04N2MzLTQxOTYtOTllOS1kM2I3ZDYyZDNhNjEiLCJpYXQiOjE2MjUxNjIzODMsImV4cCI6MTYyNTE2OTU4MywiaXNzIjoiNWM1MzZmZTI2ZmUzZDExMWMwNThlNjk4IiwiT3JnVW5pdElkIjoiNTVlZjNmN2NmNzIzYWE0MzFjOTllMTgwIn0.ParP8ucZQ5gvJaw0SXsmX7Ty_m-keLvIbPPrVZZTc7E"
+        },
+        "payWithVenmo": {
+            "merchantId": "1953896702662410263",
+            "accessToken": "access_token$sandbox$38kx88m8y5bf27c6$ac3cdf777d0f9811ff18e9b5151f45e4",
+            "environment": "sandbox"
+        },
+        "paypalEnabled": true,
+        "paypal": {
+            "displayName": "Sean O'Brien Paintings & Illustrations",
+            "clientId": null,
+            "privacyUrl": "http://example.com/pp",
+            "userAgreementUrl": "http://example.com/tos",
+            "assetsUrl": "https://checkout.paypal.com",
+            "environment": "offline",
+            "environmentNoNetwork": true,
+            "unvettedMerchant": false,
+            "braintreeClientId": "masterclient3",
+            "billingAgreementsEnabled": true,
+            "merchantAccountId": "smozart05",
+            "payeeEmail": null,
+            "currencyIsoCode": "USD"
+        }
+    }
+}

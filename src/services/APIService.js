@@ -12,7 +12,6 @@ import {
   orderDefaults,
   customerAddressAttributes
 } from '@/utils/attributes'
-import router from '../router'
 
 const normalizedOrder = (order, response) => {
   let nOrder = normalize(response.data).get(orderAttributes)
@@ -122,10 +121,7 @@ const handleCustomerSubscription = (customerEmail, customerSubscription) => {
   }
 }
 
-const getOrder = (orderId, orderId2) => {
-  console.log('orderId:', orderId)
-  console.log('orderId2:', orderId2)
-  console.dir(router.currentRoute)
+const getOrder = (orderId) => {
   return apiClient
     .get('/orders/' + orderId + '?include=' + orderIncludes.join(','))
     .then(response => {
