@@ -19,7 +19,6 @@
         :count="index+1"
         :total="shipments.length"
       />
-      <span>please refresh browser if button continues loading after selection.</span>
       <v-btn
         id="delivery-step-submit"
         color="primary"
@@ -28,6 +27,7 @@
         :disabled="disabled"
         :loading="buttons.loading_delivery"
       >{{ submitLabel }}</v-btn>
+      <p>please refresh browser if button continues loading after selection.</p>
 
       <div
         class="order-error"
