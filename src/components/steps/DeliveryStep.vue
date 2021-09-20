@@ -19,6 +19,7 @@
         :count="index+1"
         :total="shipments.length"
       />
+      <span>please refresh browser if button continues loading after selection.</span>
       <v-btn
         id="delivery-step-submit"
         color="primary"
