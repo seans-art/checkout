@@ -23,9 +23,9 @@
           </h2>
           <p>{{ $t('generic.thankyou_message') }}</p>
         </header>
-        <section>
-          <div class="header">{{ $t('generic.customer') }}:</div>
-          {{ order.customer_email }}
+        <section style="text-align: center;">
+          <!-- <div class="header">{{ $t('generic.customer') }}:</div> -->
+          <span>We'll send an email to <strong>{{ order.customer_email }}</strong> once we are about to begin work.</span>
         </section>
         <section class="addresses">
           <v-container>
@@ -89,6 +89,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// TODO: re-enable class to show field once the fields populate on confirmation
+.addresses {
+  display: none;
+}
 svg {
   max-height: 80px;
   margin: 20px 0;

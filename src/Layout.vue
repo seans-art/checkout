@@ -7,7 +7,7 @@
       <v-layout wrap>
         <v-flex xs12 md7 order-xs2 order-md1>
           <v-row justify="center" class="header">
-            <v-img :src="logoUrl" :width="logoWidth" max-width="240" />
+            <v-img :src="logoUrl" :width="logoWidth" max-width="480" />
           </v-row>
         </v-flex>
         <v-flex xs12 md5 order-xs1 order-md2></v-flex>

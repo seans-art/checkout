@@ -6,7 +6,6 @@ node_modules
 /tests/integration/screenshots/
 
 # local env files
-.env.local
 .env.*.local
 cypress.env.json
 

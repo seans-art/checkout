@@ -11,7 +11,7 @@
         @blur="handleBlur()"
       ></v-text-field>
     </v-flex>
-    <v-flex xs12 px-2 v-if="showCustomerSubscription">
+    <v-flex xs12 px-2 v-if="showCustomerSubscription" class="newsletter">
       <v-checkbox
         :label="$t('generic.customer_subscription')"
         id="customer-subscription-checkbox"
@@ -78,4 +78,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.newsletter {
+  opacity: 0;
+  pointer-events: none;
+  cursor: default;
+}
+</style>
