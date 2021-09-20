@@ -42,7 +42,7 @@ export default {
   name: 'Layout',
   data () {
     return {
-      logoUrl: process.env.VUE_APP_LOGO_URL,
+      logoUrl: 'https://raw.githubusercontent.com/seans-art/checkout/master/logo.JPG',
       logoWidth: process.env.VUE_APP_LOGO_WIDTH
     }
   },
