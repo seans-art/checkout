@@ -169,20 +169,6 @@ $order_id
 
 #!pwsh
 
-# UPDATE ORDER
-# PATCH ORDER
-
-$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
-$headers.Add("Content-Type", "application/vnd.api+json")
-$headers.Add("Authorization", "Bearer $access_token")
-
-$body = "{`n  `"data`": {`n    `"type`": `"orders`",`n    `"id`": `"$order_id`",`n    `"attributes`": {`n      `"guest`": `"{{order_guest}}`"`n    },`n    `"relationships`": {}`n  }`n}"
-
-$response = Invoke-RestMethod "https://self.commercelayer.io/api/orders/$order_id" -Method 'PATCH' -Headers $headers -Body $body
-$response | ConvertTo-Json
-
-#!pwsh
-
 Invoke-WebRequest -Uri "https://api.sandbox.braintreegateway.com/merchants/pc8gbnvtznp4ff2t/client_api/v1/payment_methods/tokencc_bf_55hkj6_zq4shj_fc9972_ycjy5g_bb6/three_d_secure/lookup" `
 -Method "POST" `
 -Headers @{
@@ -202,3 +188,111 @@ Invoke-WebRequest -Uri "https://api.sandbox.braintreegateway.com/merchants/pc8gb
 } `
 -ContentType "application/json" `
 -Body "{`"amount`":280,`"additionalInfo`":{`"billingLine1`":`"6122 Coldbrook Ave`",`"billingCity`":`"Lakewood`",`"billingState`":`"CA`",`"billingPostalCode`":`"90713`",`"billingCountryCode`":`"US`",`"billingPhoneNumber`":`"5624121190`",`"billingGivenName`":`"Stock`",`"billingSurname`":`"Location`",`"email`":`"alex@thefullertonian.com`"},`"exemptionRequested`":true,`"dfReferenceId`":`"0_660e9b1f-4494-472b-bcfb-fe04af152817`",`"clientMetadata`":{`"sdkVersion`":`"web/3.50.0`",`"requestedThreeDSecureVersion`":`"2`",`"cardinalDeviceDataCollectionTimeElapsed`":5200},`"authorizationFingerprint`":`"eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IjIwMTgwNDI2MTYtc2FuZGJveCIsImlzcyI6Imh0dHBzOi8vYXBpLnNhbmRib3guYnJhaW50cmVlZ2F0ZXdheS5jb20ifQ.eyJleHAiOjE2MjUyNDg3ODIsImp0aSI6IjU1NmI0Y2U5LTU1YmYtNDlmZS05YjY5LWU4NTJmMzg0ZTlmMSIsInN1YiI6InBjOGdibnZ0em5wNGZmMnQiLCJpc3MiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwibWVyY2hhbnQiOnsicHVibGljX2lkIjoicGM4Z2JudnR6bnA0ZmYydCIsInZlcmlmeV9jYXJkX2J5X2RlZmF1bHQiOnRydWV9LCJyaWdodHMiOlsibWFuYWdlX3ZhdWx0Il0sInNjb3BlIjpbIkJyYWludHJlZTpWYXVsdCJdLCJvcHRpb25zIjp7Im1lcmNoYW50X2FjY291bnRfaWQiOiJzbW96YXJ0MDUifX0.624CJN8b181zsRxrMk20HhCHAx4vI8Zv_o1KZ0KMYgXlP_gDQG1sQX22BC6e2OIgHTyIhziu2JuQniTuLiNtQA`",`"braintreeLibraryVersion`":`"braintree/web/3.50.0`",`"_meta`":{`"merchantAppId`":`"checkout.seanobrien.art`",`"platform`":`"web`",`"sdkVersion`":`"3.50.0`",`"source`":`"client`",`"integration`":`"custom`",`"integrationType`":`"custom`",`"sessionId`":`"d88e2003-82d1-409a-975f-1596872e97f1`"}}"
+
+#!pwsh
+
+# successful patch response 200
+
+Invoke-WebRequest -Uri "https://self.commercelayer.io/api/braintree_payments/zokvsjWxxJ" `
+-Method "PATCH" `
+-Headers @{
+"method"="PATCH"
+  "authority"="self.commercelayer.io"
+  "scheme"="https"
+  "path"="/api/braintree_payments/zokvsjWxxJ"
+  "sec-ch-ua"="`"Chromium`";v=`"92`", `" Not A;Brand`";v=`"99`", `"Google Chrome`";v=`"92`""
+  "accept"="application/vnd.api+json"
+  "authorization"="Bearer eyJhbGciOiJIUzUxMiJ9.eyJvcmdhbml6YXRpb24iOnsiaWQiOiJqWGRXYkZqWU15Iiwic2x1ZyI6InNlbGYifSwiYXBwbGljYXRpb24iOnsiaWQiOiJkTW5XbWl3RU9wIiwia2luZCI6InNhbGVzX2NoYW5uZWwiLCJwdWJsaWMiOnRydWV9LCJ0ZXN0Ijp0cnVlLCJleHAiOjE2Mjk2OTAzMDIsInJhbmQiOjAuMzAwNzQwODY4NzQ4NjQ3NH0.1gB8aGis6IQIVstXH6_8-rfqiOboseAvNRKFGjL_OXtFpSEE1eGoaq67mKmPHzicMbsg8heqZMkAbsTfdzyiDA"
+  "sec-ch-ua-mobile"="?0"
+  "user-agent"="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"
+  "origin"="https://checkout.seanobrien.art"
+  "sec-fetch-site"="cross-site"
+  "sec-fetch-mode"="cors"
+  "sec-fetch-dest"="empty"
+  "referer"="https://checkout.seanobrien.art/"
+  "accept-encoding"="gzip, deflate, br"
+  "accept-language"="en-US,en;q=0.9"
+  "sec-gpc"="1"
+} `
+-ContentType "application/vnd.api+json" `
+-Body "{`"data`":{`"type`":`"braintree_payments`",`"id`":`"zokvsjWxxJ`",`"attributes`":{`"payment_method_nonce`":`"69916dc4-d098-04e0-5674-248a9517961b`"}}}"
+
+#!pwsh
+
+# UPDATE ORDER
+# PATCH ORDER
+
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+$headers.Add("Content-Type", "application/vnd.api+json")
+$headers.Add("Authorization", "Bearer $access_token")
+
+$body = "{`n  `"data`": {`n    `"type`": `"orders`",`n    `"id`": `"$order_id`",`n    `"attributes`": {`n      `"guest`": `"{{order_guest}}`"`n    },`n    `"relationships`": {}`n  }`n}"
+
+$response = Invoke-RestMethod "https://self.commercelayer.io/api/orders/$order_id" -Method 'PATCH' -Headers $headers -Body $body
+$response | ConvertTo-Json
+
+#!pwsh
+
+# UPDATE ORDER
+# PATCH ORDER
+
+$headers = @{}
+$headers.Add("Accept", "*/*")
+# $headers.Add("User-Agent", "Thunder Client (https://www.thunderclient.io)")
+$headers.Add("Content-Type", "application/vnd.api+json")
+$headers.Add("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJvcmdhbml6YXRpb24iOnsiaWQiOiJqWGRXYkZqWU15Iiwic2x1ZyI6InNlbGYifSwiYXBwbGljYXRpb24iOnsiaWQiOiJkTW5XbWl3RU9wIiwia2luZCI6InNhbGVzX2NoYW5uZWwiLCJwdWJsaWMiOnRydWV9LCJ0ZXN0Ijp0cnVlLCJleHAiOjE2Mjk2OTAzMDIsInJhbmQiOjAuMzAwNzQwODY4NzQ4NjQ3NH0.1gB8aGis6IQIVstXH6_8-rfqiOboseAvNRKFGjL_OXtFpSEE1eGoaq67mKmPHzicMbsg8heqZMkAbsTfdzyiDA")
+
+$reqUrl = 'https://self.commercelayer.io/api/orders/qjobhEYLbm'
+$body = '{
+  "data": {
+    "type": "orders",
+    "id": "qjobhEYLbm",
+    "attributes": {
+      "guest": "{{order_guest}}",
+      "_place": 1
+    },
+    "relationships": {}
+  }
+}'
+
+$response = Invoke-RestMethod -Uri $reqUrl -Method Patch -Headers $headers -ContentType 'application/vnd.api+json' -Body $body
+# $response | ConvertTo-Jsona
+
+#!pwsh
+
+# failed patch 422 
+
+Invoke-WebRequest -Uri "https://self.commercelayer.io/api/orders/qjobhEYLbm" `
+-Method "PATCH" `
+-Headers @{
+  # "method"="PATCH"
+  # "authority"="self.commercelayer.io"
+  # "scheme"="https"
+  # "sec-ch-ua"="`"Chromium`";v=`"92`", `" Not A;Brand`";v=`"99`", `"Google Chrome`";v=`"92`""
+  # "accept"="application/vnd.api+json"
+  "authorization"="Bearer $access_token"
+  # "sec-ch-ua-mobile"="?0"
+  # "user-agent"="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"
+  # "origin"="https://checkout.seanobrien.art"
+  # "sec-fetch-site"="cross-site"
+  # "sec-fetch-mode"="cors"
+  # "sec-fetch-dest"="empty"
+  # "referer"="https://checkout.seanobrien.art/"
+  # "accept-encoding"="gzip, deflate, br"
+  # "accept-language"="en-US,en;q=0.9"
+  # "sec-gpc"="1"
+} `
+-ContentType "application/vnd.api+json" `
+-Body "{`"data`":{`"type`":`"orders`",`"id`":`"qjobhEYLbm`",`"attributes`":{`"_place`":1}}}"
+
+#!pwsh
+
+# Patch 422 error response message
+{"errors":[{"title":"(92206) Url must be 13 characters or shorter and can only contain letters, numbers and periods.","detail":"(92206) Url must be 13 characters or shorter and can only contain letters, numbers and periods.","code":"VALIDATION_ERROR","source":{"pointer":"/data"},"status":"422","meta":{"error":"(92206) Url must be 13 characters or shorter and can only contain letters, numbers and periods."}},{"title":"authorization failed","detail":"authorization failed","code":"VALIDATION_ERROR","source":{"pointer":"/data"},"status":"422","meta":{"error":"authorization_failed"}},{"title":"transition is not permitted","detail":"status - transition is not permitted","code":"VALIDATION_ERROR","source":{"pointer":"/data/attributes/status"},"status":"422","meta":{"error":"not_permitted_transition"}}]}
+
+#!pwsh
+
+curl -X GET \
+  https://self.commercelayer.io/api/orders/ \
+  -H 'Accept: application/vnd.api+json' \
+  -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJvcmdhbml6YXRpb24iOnsiaWQiOiJqWGRXYkZqWU15Iiwic2x1ZyI6InNlbGYifSwiYXBwbGljYXRpb24iOnsiaWQiOiJkTW5XbWl3RU9wIiwia2luZCI6InNhbGVzX2NoYW5uZWwiLCJwdWJsaWMiOnRydWV9LCJ0ZXN0Ijp0cnVlLCJleHAiOjE2Mjk3NjkxMDMsInJhbmQiOjAuMzkxMjg1NDE4NDE4Nzc1Mn0.odCOjL2NqozLTYx7Z5tDpjZpAHgmncgj2lstX0zQ8YIQvlwDMWanVrURZm7K4ctMdK2YsgvJr9TLCUVKB_qX3A'
