@@ -126,7 +126,7 @@ export default {
       this.loading_payment = true
 
       let that = this
-
+      debugger;
       hostedFieldsInstance.tokenize(
         {
           cardholderName: `${that.order.billing_address.first_name} ${that.order.billing_address.last_name}`
